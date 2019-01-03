@@ -4,6 +4,8 @@ using System.IO;
 using UnityEngine;
 using Object = System.Object;
 
+// #define LOG_HEADER
+
 namespace SciRev
 {
     // A message logging class to replace Debug.Log
@@ -21,10 +23,12 @@ namespace SciRev
         }
 
         // ==> Implement own version
+        #if LOG_HEADER
         private static String Version
         {
             get { return typeof(Logger).Assembly.GetName().Name;  }
         }
+        #endif
 
         // Default logger
         private static Logger _defaultLogger;
@@ -130,12 +134,14 @@ namespace SciRev
                 _loggerStream = new StreamWriter(logFile);
 
                 // Write an opening message
+                #if LOG_HEADER
                 String logVersion = "//=====  " + Version + "  =====//";
                 String logHeader = new string('=', logVersion.Length - 4);
                 logHeader = "//" + logHeader + "//";
 
                 // Don't use Log() because we don't want a date time in front of the Versioning.
-                _loggerStream.WriteLine(logHeader + "\n" + logVersion + "\n" + logHeader); 
+                _loggerStream.WriteLine(logHeader + "\n" + logVersion + "\n" + logHeader);
+                #endif
                 Log("Logger \"" + logFileName + "\" was created");
             }
             catch (Exception e)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Kopernicus;
@@ -17,6 +18,9 @@ namespace SciRev
 
         [ParserTargetCollection("self", Key = "value", NameSignificance = NameSignificance.Key)]
         public List<String> Values;
+
+        [ParserTargetCollection("Values")]
+        public MultikeyDictionary<String, String> RawValues;
     }
 
     [RequireConfigType(ConfigType.Node)]

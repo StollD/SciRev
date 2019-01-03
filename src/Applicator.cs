@@ -61,15 +61,27 @@ namespace SciRev
 
                 // Recursively parse nodes
                 ApplyDefinitions(loaders[i].Situations, ref results, key);
+                
+                // Add raw values
+                if (loaders[i].RawValues != null)
+                {
+                    foreach (KeyValuePair<String, String> rawValue in loaders[i].RawValues)
+                    {
+                        String rawKey = key + rawValue.Key;
+                        results.AddValue(rawKey, rawValue.Value);
+                        Logger.Active.Log("Adding " + rawKey + " to ScienceDefs");
+                    }
+                }
 
                 // If there are no values, we have nothing to do anymore
-                if (loaders[i].Values == null) continue;
-                
-                // Add the values
-                for (Int32 j = 0; j < loaders[i].Values.Count; j++)
+                if (loaders[i].Values != null)
                 {
-                    results.AddValue(key, loaders[i].Values[j]);
-                    Logger.Active.Log("Adding " + key + " to ScienceDefs");
+                    // Add the values
+                    for (Int32 j = 0; j < loaders[i].Values.Count; j++)
+                    {
+                        results.AddValue(key, loaders[i].Values[j]);
+                        Logger.Active.Log("Adding " + key + " to ScienceDefs");
+                    }
                 }
             }
         }
