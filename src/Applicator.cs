@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Kopernicus;
+using Kopernicus.ConfigParser;
 using UnityEngine;
 
 namespace SciRev

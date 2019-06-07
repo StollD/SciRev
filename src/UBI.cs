@@ -27,6 +27,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 [SuppressMessage("ReSharper", "InconsistentNaming")]
 [SuppressMessage("ReSharper", "CheckNamespace")]
@@ -180,7 +181,7 @@ public static class UBI
         {
             if (idents[i].UBI == ubi)
             {
-                UnityEngine.Object.Destroy(idents[i].Object);
+                Object.Destroy(idents[i].Object);
             }
         }
     }
