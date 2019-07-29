@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Kopernicus.ConfigParser;
 using UnityEngine;
 
@@ -44,6 +45,12 @@ namespace SciRev
                     throw new Exception("Failed to load Experiment: " + experimentName);
                 }
             }
+
+            // Reset the already loaded experiment definitions
+            FieldInfo experiments =
+                typeof(ResearchAndDevelopment).
+                    GetField("experiments", BindingFlags.Static | BindingFlags.NonPublic);
+            experiments?.SetValue(null, null);
         }
 
         private void ApplyDefinitions(List<SituationLoader> loaders, ref ConfigNode results, String prefix = "")
